@@ -11,7 +11,7 @@
           </div>
           </Col>
           <Col span="4" v-for="(item, index) in statusList" :key="index">
-          <kanbanContentHeader :text="item.stateStr" :taskNumber="item.taskNumber"></kanbanContentHeader>
+          <kanbanContentHeader :text="item.stateStr" :state="item.state" :taskNumber="item.taskNumber"></kanbanContentHeader>
           </Col>
 
         </Row>

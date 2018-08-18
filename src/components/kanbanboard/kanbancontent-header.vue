@@ -1,7 +1,7 @@
 <template>
   <div class="content-header">
      <span class="title">
-        {{text}}
+        {{text}} :: {{state}}
      </span>
      <span>
         任务 {{taskNumber}}
@@ -10,9 +10,12 @@
   </div>
 </template>
 <script>
-  export default{
+  export default {
     props:{
       text: {
+        type: String
+      },
+      state: {
         type: String
       },
       taskNumber: {

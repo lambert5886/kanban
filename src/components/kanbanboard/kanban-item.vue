@@ -1,6 +1,7 @@
 <template>
   <div :id="item.userId" @click="itemClick(item)" class="card-wrapper"
-        :groupId="item.groupId">
+        :groupId="item.groupId"
+        :state="item.taskState">
       <div class="card-wrap">
           <Card :style="item.bgColor">
             <div class="circle-wrapper">
