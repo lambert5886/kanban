@@ -14,36 +14,6 @@ import { EventBus } from "@/tools";
 import kanbanboard from "@/components/kanbanboard";
 import kanbanSearch from "@/components/kanbanSearch";
 
-<<<<<<< HEAD
-  export default {
-    name: 'App',
-    data() {
-      return {
-        cardListData: [],
-        groupListData: [],
-        statusListData: []
-
-      }
-    },
-    mounted(){
-      EventBus.$on('moveEnd', this.moveEnd);
-      EventBus.$on('clickItem', this.clicked);
-      EventBus.$on('search', this.searchHandle);
-      EventBus.$on('addTask', this.addNewTask);
-      let _cardList = [
-         
-          {
-            taskId: "#US0002",
-            description: "设计开发-提供用户登录功能1,IMG提供用户登录功能1,提供用户登录功能1,提供用户登录功能1,提供用户登录功能1",
-            userName: "user1",
-            userId: "userId_02",
-            groupId: 'group_02',
-            bgColor: { background: '#f8d6af' },
-            taskStateStr: "设计开发",
-            taskState: '02',
-            headPortrait: require('@/assets/user_02.png'),
-          },
-=======
 export default {
   name: "App",
   data() {
@@ -166,7 +136,6 @@ export default {
       this.cardListBase = [];
       this.cardListBase.push(..._cardList);
         let _statusList = [
->>>>>>> a6b1de6751e959b71ecbf96295781e202e786017
           {
             stateStr: "未开始",
             state: "01",
@@ -193,27 +162,6 @@ export default {
             taskNumber: "0"
           }
         ];
-<<<<<<< HEAD
-        let _groupList = [
-          { text: '产品待办事项' },
-          {
-            text: '用户登录',
-            groupId: 'group_01'
-          },
-          {
-            text: '创建代码仓库',
-            groupId: 'group_02'
-          },
-          {
-            text: '未知项',
-            groupId: 'group_03'
-          }];
-          let _statusList = [{
-          stateStr: '未开始',
-          state: '01',
-          taskNumber: '3',
-        },
-=======
 
       this.statusListBase = [];
       this.statusListBase.push(..._statusList);
@@ -296,7 +244,6 @@ export default {
     groupList: function() {
       let _groupList = [
         { text: "产品待办事项" },
->>>>>>> a6b1de6751e959b71ecbf96295781e202e786017
         {
           text: "用户登录",
           groupId: "group_01"
@@ -325,87 +272,9 @@ export default {
           params: "name"
         },
         {
-<<<<<<< HEAD
-          stateStr: '上线',
-          state: '05',
-          taskNumber: '3',
-        },];
-
-        this.cardListData.push(..._cardList);
-        this.groupListData.push(..._groupList);
-        this.statusListData.push(..._statusList);
-
-  this.addBaseCard(this.cardListData, this.statusListData);
-
-
-    },
-    methods: {
-      moveEnd(info){ // 移动卡片结束后
-       console.log(' 移动卡片结束后 :::', info);
-      },
-      clicked(info){ // 点击卡片方法
-        console.log(' 点击卡片方法 ::: ', info);
-      },
-      searchHandle(info){ // 查询方法
-        console.log( '查询  ::: ', info);
-      },
-      addNewTask(info){
-        console.log('  添加任务  :::', info);
-      },
-      addBaseCard(cards, status){
-        let _cards = cards,
-            _status = status;
-            //taskState, state
-        cards.forEach(function(cardItem, index){
-          let noneState = [];
-
-           _status.forEach(function(statusItem, index){
-             if(cardItem.taskState == statusItem.state){
-               console.log(' cards taskState  >>> ', cardItem.taskState);
-             }else{
-               console.log('none state >>>  ', statusItem.state)
-               noneState.push(statusItem.state);
-             }
-           });
-           
-           console.log()
-
-
-        });
-
-      }
-    },
-    computed: {
-      cardList: function () {
-      let _cardList = this.cardListData;
-     
-
-
-        return _cardList;
-      },
-      groupList: function () {
-      let _groupList = this.groupListData;
-
-        return _groupList;
-      },
-      statusList: function () {
-        let _statusList = this.statusListData;
-        return _statusList;
-      },
-      searchParams: function(){
-        return [{
-          type: 'select',
-          label: '需求名',
-          params: 'name'
-        },{
-          type: 'input',
-          label: '需求名称',
-          params: 'name'
-=======
           type: "input",
           label: "需求名称",
           params: "name"
->>>>>>> a6b1de6751e959b71ecbf96295781e202e786017
         },
         {
           type: "select",
