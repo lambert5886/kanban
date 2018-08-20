@@ -19,9 +19,9 @@
     name: 'App',
     data() {
       return {
-        cardList: [],
-        groupList: [],
-        statusList: []
+        cardListData: [],
+        groupListData: [],
+        statusListData: []
 
       }
     },
@@ -30,41 +30,8 @@
       EventBus.$on('clickItem', this.clicked);
       EventBus.$on('search', this.searchHandle);
       EventBus.$on('addTask', this.addNewTask);
-     
-    },
-    methods: {
-      moveEnd(info){ // 移动卡片结束后
-       console.log(' 移动卡片结束后 :::', info);
-      },
-      clicked(info){ // 点击卡片方法
-        console.log(' 点击卡片方法 ::: ', info);
-      },
-      searchHandle(info){ // 查询方法
-        console.log( '查询  ::: ', info);
-      },
-      addNewTask(info){
-        console.log('  添加任务  :::', info);
-      },
-      addBaseCard(cards, status){
-        
-      }
-    },
-    computed: {
-      cardList: function () {
-       
-
-        let _cardList = [
-          {
-            taskId: "#US0001",
-            description: "未开始-提供用户登录功能1,IMG提供用户登录功能1,提供用户登录功能1,提供用户登录功能1,提供用户登录功能1",
-            userName: "user1",
-            userId: "userId_01",
-            groupId: 'group_01',
-            bgColor: { background: '#f8d6af' },
-            taskStateStr: "未开始",
-            taskState: '01',
-            headPortrait: require('@/assets/user_02.png'),
-          },
+      let _cardList = [
+         
           {
             taskId: "#US0002",
             description: "设计开发-提供用户登录功能1,IMG提供用户登录功能1,提供用户登录功能1,提供用户登录功能1,提供用户登录功能1",
@@ -143,13 +110,6 @@
             headPortrait: require('@/assets/user_02.png'),
           },
         ];
-
-        this.cardList = [];
-        this.cardList.push(..._cardList);
-
-        return _cardList;
-      },
-      groupList: function () {
         let _groupList = [
           { text: '产品待办事项' },
           {
@@ -164,11 +124,7 @@
             text: '未知项',
             groupId: 'group_03'
           }];
-
-        return _groupList;
-      },
-      statusList: function () {
-        let _statusList = [{
+          let _statusList = [{
           stateStr: '未开始',
           state: '01',
           taskNumber: '3',
@@ -194,6 +150,65 @@
           taskNumber: '3',
         },];
 
+        this.cardListData.push(..._cardList);
+        this.groupListData.push(..._groupList);
+        this.statusListData.push(..._statusList);
+
+  this.addBaseCard(this.cardListData, this.statusListData);
+
+
+    },
+    methods: {
+      moveEnd(info){ // 移动卡片结束后
+       console.log(' 移动卡片结束后 :::', info);
+      },
+      clicked(info){ // 点击卡片方法
+        console.log(' 点击卡片方法 ::: ', info);
+      },
+      searchHandle(info){ // 查询方法
+        console.log( '查询  ::: ', info);
+      },
+      addNewTask(info){
+        console.log('  添加任务  :::', info);
+      },
+      addBaseCard(cards, status){
+        let _cards = cards,
+            _status = status;
+            //taskState, state
+        cards.forEach(function(cardItem, index){
+          let noneState = [];
+
+           _status.forEach(function(statusItem, index){
+             if(cardItem.taskState == statusItem.state){
+               console.log(' cards taskState  >>> ', cardItem.taskState);
+             }else{
+               console.log('none state >>>  ', statusItem.state)
+               noneState.push(statusItem.state);
+             }
+           });
+           
+           console.log()
+
+
+        });
+
+      }
+    },
+    computed: {
+      cardList: function () {
+      let _cardList = this.cardListData;
+     
+
+
+        return _cardList;
+      },
+      groupList: function () {
+      let _groupList = this.groupListData;
+
+        return _groupList;
+      },
+      statusList: function () {
+        let _statusList = this.statusListData;
         return _statusList;
       },
       searchParams: function(){
