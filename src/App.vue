@@ -1,11 +1,7 @@
 <template>
   <div id="app" class="layout">
-      <kanbanSearch :searchParams="searchParams"></kanbanSearch>
-    <kanbanboard 
-          :cardList="cardList" 
-         
-          :statusList="statusList"
-         ></kanbanboard>
+   
+       
   </div>
 </template>
 <script>
@@ -13,6 +9,7 @@ import { EventBus } from "@/tools";
 
 import kanbanboard from "@/components/kanbanboard";
 import kanbanSearch from "@/components/kanbanSearch";
+import textEditor from '@/components/text-editor/text-editor.vue';
 
 export default {
   name: "App",
@@ -313,7 +310,8 @@ export default {
   },
   components: {
     kanbanboard,
-    kanbanSearch
+    kanbanSearch,
+    textEditor
   }
 };
 </script>
