@@ -28,14 +28,17 @@
               :key="index"
              >
            
-          <kanbanItem 
-              :key="keys" 
-              :item = "value"
-              :Group = true
-              v-for="(value, keys) in cardList"
-             v-if="itemGroup.groupId == value.groupId && value.taskState == items.state"
-              >
-             </kanbanItem>
+             <kanbanItem 
+             :key="keys" 
+             :item = "value"
+             :Group = true
+             v-for="(value, keys) in cardList"
+           v-if="itemGroup.groupId == value.groupId && value.taskState == items.state"
+             >
+         </kanbanItem>
+         
+         
+               
           <!--有分组-->
           </Col>
         </Row>

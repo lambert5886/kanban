@@ -118,7 +118,9 @@
   .circle-wrapper{
     text-align: left;
   }
-
+  .ivu-card:hover{
+    box-shadow: 0px 0px 0px;
+  }
 
 .circle{
     width: 16px;
