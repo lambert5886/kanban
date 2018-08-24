@@ -3,7 +3,7 @@
       <kanbanSearch :searchParams="searchParams"></kanbanSearch>
     <kanbanboard 
           :cardList="cardList" 
-          :groupList="groupList"
+       
           :statusList="statusList"
          ></kanbanboard>
   </div>
@@ -36,6 +36,7 @@ export default {
           return true;
         }
       });
+      _groupId = 0;
      let getWhiteCard =  this.getWhiteCard(this.cardListBase, _groupId, this.statusListBase);
      this.cardListBase.push(...getWhiteCard);
   },
@@ -195,7 +196,9 @@ export default {
           _status = status;
       
       let whiteCards = [];
-      _groups.forEach(function(groupItem, index){
+     
+      if(_groups.length > 0){
+        _groups.forEach(function(groupItem, index){
               _status.forEach(function(statusItem, index){
                 whiteCards.push({groupId: groupItem.groupId, taskState: statusItem.state,
                                  userId:  groupItem.groupId + statusItem.state,
@@ -203,6 +206,16 @@ export default {
                                  });
               })
       });
+      }else{
+        _status.forEach(function(statusItem, index){
+                whiteCards.push({taskState: statusItem.state,
+                                 userId:  'userId' + statusItem.state,
+                                 bgColor: { background: "rgba(255, 255, 255, 0)",border: 'none' },
+                                 });
+              })
+      }
+      
+      console.log(whiteCards)
 
       return whiteCards;
 
