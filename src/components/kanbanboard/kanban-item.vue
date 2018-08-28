@@ -1,37 +1,41 @@
 <template>
   <div>
 
-  
-  <div :id="item.userId" 
-       @click="itemClick(item)" 
-       class="card-wrapper" 
-       :groupId="item.groupId" 
-       :state="item.taskState"
-        >
-    <div class="card-wrap">
-      <Card :style="item.bgColor">
-        <div class="circle-wrapper">
-          <p class="circle">
-            <Icon type="record" :size="12"></Icon>
+
+    <div
+      :id="item.userId"
+      @click="itemClick(item)"
+      class="card-wrapper"
+      :groupId="item.groupId"
+      :state="item.taskState"
+    >
+      <div class="card-wrap">
+        <Card :style="item.bgColor">
+          <div class="circle-wrapper">
+            <p class="circle">
+              <Icon
+                type="record"
+                :size="12"
+              ></Icon>
+            </p>
+            <span class="taskId">{{item.taskId}}</span>
+          </div>
+
+          <p class="item-content">{{item.description}}, {{item.userId}}</p>
+          <p class="item-name">
+            <span class="user_name">
+              {{item.userName}}
+            </span>
+            <img :src="item.headPortrait" />
+
           </p>
-          <span class="taskId">{{item.taskId}}</span>
-        </div>
 
-        <p class="item-content">{{item.description}}</p>
-        <p class="item-name">
-          <span class="user_name">
-            {{item.userName}}
-          </span>
-          <img :src="item.headPortrait" />
+        </Card>
+      </div>
 
-        </p>
-
-      </Card>
     </div>
 
   </div>
- 
-</div>
 </template>
 
 <script>
@@ -52,56 +56,17 @@
         type: Boolean,
 
       },
-  
+
     },
     mounted() {
-      document.body.ondrop = function (event) {
-        event.preventDefault();
-        event.stopPropagation();
-      };
-      this.bindSortable(this.item.userId, this.groupId);
 
     },
     methods: {
       itemClick(info) {
+
         EventBus.$emit('clickItem', info);
       },
-      bindSortable(moveId, groupId) {
-        let vm = this;
-        let todoList = document.getElementById(moveId);
 
-        Sortable.create(todoList, {
-          group: {
-            name: 'list',
-            pull: true
-          },
-          animation: 120,
-          ghostClass: 'placeholder-style',
-          fallbackClass: 'iview-admin-cloned-item',
-          onMove: function (evt, originalEvent) {
-
-            if (vm.Group) { // 分组时移动
-              if (evt.from.getAttribute('groupId') == evt.to.getAttribute('groupId')) {
-                return;
-              } else {
-                return false;
-              }
-            } else {
-              if (evt.from.getAttribute('groupId') !== evt.to.getAttribute('groupId')) {
-                return;
-              } else {
-                return;
-              }
-            }
-
-          },
-          onEnd: function (evt) {
-
-            EventBus.$emit('moveEnd', { evt, item: vm.item });
-          }
-        });
-
-      }
     },
 
   }
