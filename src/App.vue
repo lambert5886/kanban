@@ -3,7 +3,7 @@
       <kanbanSearch :searchParams="searchParams"></kanbanSearch>
     <kanbanboard 
           :cardList="cardList" 
-       
+          :groupList ="groupList"
           :statusList="statusList"
          ></kanbanboard>
   </div>
@@ -36,7 +36,7 @@ export default {
           return true;
         }
       });
-      _groupId = 0;
+      // _groupId = 0;
      let getWhiteCard =  this.getWhiteCard(this.cardListBase, _groupId, this.statusListBase);
      this.cardListBase.push(...getWhiteCard);
   },
@@ -67,30 +67,8 @@ export default {
           taskState: "02",
           headPortrait: require("@/assets/user_02.png")
         },
-        {
-          taskId: "#US0003",
-          description:
-            "设计开发-提供用户登录功能1,,提供用户登录功能1,提供用户登录功能1",
-          userName: "user1",
-          userId: "userId_03",
-          groupId: "group_01",
-          bgColor: { background: "#f8d6af" },
-          taskStateStr: "测试",
-          taskState: "02",
-          headPortrait: require("@/assets/user_02.png")
-        },
-        {
-          taskId: "#US0004",
-          description:
-            "未开始-提供用户登录功能1,IMG提供用户登录功能1提供用户登录功能1",
-          userName: "user1",
-          userId: "userId_04",
-          groupId: "group_03",
-          bgColor: { background: "#f8d6af" },
-          taskStateStr: "测试",
-          taskState: "01",
-          headPortrait: require("@/assets/user_02.png")
-        },
+     
+     
         {
           taskId: "#US0005",
           description:
@@ -200,9 +178,10 @@ export default {
       if(_groups.length > 0){
         _groups.forEach(function(groupItem, index){
               _status.forEach(function(statusItem, index){
-                whiteCards.push({groupId: groupItem.groupId, taskState: statusItem.state,
-                                 userId:  groupItem.groupId + statusItem.state,
-                                 bgColor: { background: "rgba(255, 255, 255, 0)",border: 'none' },
+                whiteCards.push({groupId: groupItem.groupId, 
+                                 taskState: statusItem.state,
+                                 userId:  groupItem.groupId + '_' + statusItem.state,
+                                 bgColor: { background: "rgba(255, 255, 255, 0)",border: '1px dashed #ccc' },
                                  });
               })
       });
@@ -210,13 +189,11 @@ export default {
         _status.forEach(function(statusItem, index){
                 whiteCards.push({taskState: statusItem.state,
                                  userId:  'userId' + statusItem.state,
-                                 bgColor: { background: "rgba(255, 255, 255, 0)",border: 'none' },
+                                 bgColor: { background: "rgba(255, 255, 255, 0)",border: '1px dashed #ccc' },
                                  });
               })
       }
       
-      console.log(whiteCards)
-
       return whiteCards;
 
     },
@@ -226,17 +203,14 @@ export default {
       let _status = status;
       let _arr = [];
       _cards.forEach(function(cardItem, index) {
-        _groups.forEach(function(groupItem, index){
-
-
-        });
+    
         _status.forEach(function(statusItem, index) {
           if (cardItem.taskState != statusItem.state) {
             _arr.push(statusItem.state);
           }
         });
       });
-      console.log(' no state card  >>>  ', _arr)
+     
       let filteredArr = Array.from(new Set(_arr));
 
       let hasState = [];
@@ -277,15 +251,7 @@ export default {
     cardList: function() {
      
       let _cardList = this.cardListBase;
-    
-      // let _noState = this.addBaseCard(this.cardListBase, _groupId, this.statusListBase);
-      // _noState.forEach(function(item, index) {
-      //   _groupId.forEach(function(groupIdItem, index){
-      //     _cardList.push({userId: "userId" + item+ index, taskState: item,  
-      //                     groupId: groupIdItem.groupId})
-      //   })
-       
-      // });
+  
      
     
 

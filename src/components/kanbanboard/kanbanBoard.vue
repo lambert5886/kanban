@@ -23,22 +23,16 @@
             {{itemGroup.text}}
           </div>
           </Col>
-          <Col span="4" 
-              v-for="(items, index) in statusList" 
-              :key="index"
-             >
-           
-             <kanbanItem 
-             :key="keys" 
-             :item = "value"
-             :Group = true
-             v-for="(value, keys) in cardList"
-           v-if="itemGroup.groupId == value.groupId && value.taskState == items.state"
-             >
-         </kanbanItem>
-         
-         
-               
+          <Col span="4" v-for="(items, index) in statusList" :key="index">
+
+          <kanbanItem :key="keys" 
+                      :item="value" 
+                      :Group=true v-for="(value, keys) in cardList" 
+                   
+                      v-if="itemGroup.groupId == value.groupId && value.taskState == items.state">
+          </kanbanItem>
+
+
           <!--有分组-->
           </Col>
         </Row>
@@ -46,20 +40,12 @@
       <div class="row-wrapper" v-if="groupList.length == 0">
 
         <Row :gutter="16" type="flex" justify="start" align="middle">
-          <Col span="4" 
-          v-for="(items, index) in statusList" 
-          :key="index"
-         >
-         <kanbanItem 
-            :key="keys" 
-            :item = "value"
-            :Group = false
-            v-for="(value, keys) in cardList"
-            v-if=" value.taskState == items.state">
-        </kanbanItem>
-     
-      <!--无分组-->
-      </Col>
+          <Col span="4" v-for="(items, index) in statusList" :key="index">
+          <kanbanItem :key="keys" :item="value" :Group=false v-for="(value, keys) in cardList" v-if=" value.taskState == items.state">
+          </kanbanItem>
+
+          <!--无分组-->
+          </Col>
         </Row>
       </div>
 
@@ -71,7 +57,7 @@
 </template>
 
 <script>
- 
+
   import kanbanHeader from "./kanban-header";
   import kanbanContentHeader from './kanbancontent-header';
 
@@ -114,7 +100,7 @@
     },
     components: {
       kanbanHeader,
-    
+
       kanbanContentHeader,
       kanbanItem
     }
