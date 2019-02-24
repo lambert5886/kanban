@@ -62,8 +62,6 @@
             taskState: "02",
             headPortrait: require("@/assets/user_02.png")
           },
-
-
           {
             taskId: "#US0005",
             description:
@@ -188,9 +186,6 @@
       cardList: function () {
 
         let _cardList = this.cardListBase;
-
-
-
 
         return _cardList;
       },
