@@ -20,8 +20,6 @@ var axios_instance = axios.create({
 })
 Vue.use(iView)
 
-console.log(process, 'process')
-
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

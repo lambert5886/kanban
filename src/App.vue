@@ -3,16 +3,19 @@
     id="app"
     class="layout"
   >
+  <Button @click="isGroup = isGroup ? false : true">{{isGroup ? '隐藏分组': ' 显示分组'}}</Button>
     <!-- <kanbanSearch :searchParams="searchParams"></kanbanSearch> -->
     <kanbanboard
       :cardList="cardList"
       :statusList="statusList"
+      :groupList="groupList"
     ></kanbanboard>
+    
   </div>
 </template>
 <script>
   import { EventBus } from "@/tools";
-
+  import datas from '@/common/data';
   import kanbanboard from "@/components/kanbanboard";
   import kanbanSearch from "@/components/kanbanSearch";
 
@@ -20,6 +23,7 @@
     name: "App",
     data() {
       return {
+        isGroup: false,
         cardListBase: [],
         groupListBase: [],
         statusListBase: []
@@ -37,113 +41,11 @@
     },
     methods: {
       fetchData() {
-        let _cardList = [
-          {
-            taskId: "#US0001",
-            description:
-              "未开始-提供用户登录功能1,提供用户登录功能1,提供用户登录功能1",
-            userName: "user1",
-            userId: "userId_01",
-            groupId: "group_02",
-            bgColor: { background: "#f8d6af" },
-            taskStateStr: "未开始",
-            taskState: "03",
-            headPortrait: require("@/assets/user_02.png")
-          },
-          {
-            taskId: "#US0002",
-            description:
-              "设计开发-提供用户登录功能1,提供用户登录功能1",
-            userName: "user1",
-            userId: "userId_02",
-            groupId: "group_02",
-            bgColor: { background: "#f8d6af" },
-            taskStateStr: "设计开发",
-            taskState: "02",
-            headPortrait: require("@/assets/user_02.png")
-          },
-          {
-            taskId: "#US0005",
-            description:
-              "未开始-提供用户登录功能1,提供用户登录功能1,提供用户登录功能1",
-            userName: "user1",
-            userId: "userId_05",
-            groupId: "group_01",
-            bgColor: { background: "#f8d6af" },
-            taskStateStr: "测试",
-            taskState: "04",
-            headPortrait: require("@/assets/user_02.png")
-          },
-          {
-            taskId: "#US0006",
-            description:
-              "未开始-提供用户登录功能1,IMG提供用户登录功能1,提供用户登录功能1",
-            userName: "user1",
-            userId: "userId_06",
-            groupId: "group_01",
-            bgColor: { background: "#f8d6af" },
-            taskStateStr: "测试",
-            taskState: "01",
-            headPortrait: require("@/assets/user_02.png")
-          },
-          {
-            taskId: "#US0007",
-            description:
-              "未开始-提供用户登录功能1,IMG提供用户登录功能1提供用户登录功能1",
-            userName: "user1",
-            userId: "userId_07",
-            groupId: "group_01",
-            bgColor: { background: "#f8d6af" },
-            taskStateStr: "测试",
-            taskState: "01",
-            headPortrait: require("@/assets/user_02.png")
-          },
-          {
-            taskId: "#US0008",
-            description:
-              "未开始-提供用户登录功能1,IMG提供用户登录功能1,提供用户登录功能1",
-            userName: "user1",
-            userId: "userId_08",
-            groupId: "group_01",
-            bgColor: { background: "#f8d6af" },
-            taskStateStr: "测试",
-            taskState: "02",
-            headPortrait: require("@/assets/user_02.png")
-          }
-        ];
-
         this.cardListBase = [];
-        this.cardListBase.push(..._cardList);
-        let _statusList = [
-          {
-            stateStr: "未开始",
-            state: "01",
-            taskNumber: "4"
-          },
-          {
-            stateStr: "设计开发",
-            state: "02",
-            taskNumber: "3"
-          },
-          {
-            stateStr: "测试",
-            state: "03",
-            taskNumber: "0"
-          },
-          {
-            stateStr: "发布",
-            state: "04",
-            taskNumber: "1"
-          },
-          {
-            stateStr: "上线",
-            state: "05",
-            taskNumber: "0"
-          }
-        ];
+        this.cardListBase.push(...datas.cardList);
 
         this.statusListBase = [];
-        this.statusListBase.push(..._statusList);
+        this.statusListBase.push(...datas.statusList);
       },
       moveEnd(info) {
         // 移动卡片结束后
@@ -205,7 +107,7 @@
             groupId: "group_03"
           }
         ];
-
+        _groupList = this.isGroup ? _groupList : [];
         return _groupList;
       },
       statusList: function () {
